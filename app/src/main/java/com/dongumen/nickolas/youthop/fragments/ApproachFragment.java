@@ -1,6 +1,7 @@
 package com.dongumen.nickolas.youthop.fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,31 +11,30 @@ import android.view.ViewGroup;
 import com.dongumen.nickolas.youthop.R;
 
 
-public class HomeFragment extends Fragment {
+public class ApproachFragment extends Fragment {
 
-
-    public HomeFragment() {
+    public ApproachFragment() {
+        // Required empty public constructor
     }
 
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+
+    public static ApproachFragment newInstance(String param1, String param2) {
+        ApproachFragment fragment = new ApproachFragment();
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
 
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_approach, container, false);
     }
 
 

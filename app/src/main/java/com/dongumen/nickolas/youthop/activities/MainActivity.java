@@ -16,8 +16,7 @@ import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-                        HomeFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     Integer container = R.id.container;
     HomeFragment homeFragment;
@@ -86,19 +85,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -108,12 +94,6 @@ public class MainActivity extends AppCompatActivity
     private void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(container, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
-    }
-
-    @Override
-    public void onFragmentInteraction() {
-
     }
 }

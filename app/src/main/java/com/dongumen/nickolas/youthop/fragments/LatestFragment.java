@@ -1,6 +1,7 @@
 package com.dongumen.nickolas.youthop.fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,16 +10,20 @@ import android.view.ViewGroup;
 
 import com.dongumen.nickolas.youthop.R;
 
+public class LatestFragment extends Fragment {
 
-public class HomeFragment extends Fragment {
 
 
-    public HomeFragment() {
+
+    public LatestFragment() {
+        // Required empty public constructor
     }
 
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
+
+    public static LatestFragment newInstance(String param1, String param2) {
+        LatestFragment fragment = new LatestFragment();
         Bundle args = new Bundle();
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,7 +39,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_latest, container, false);
     }
 
 
@@ -48,6 +53,5 @@ public class HomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
 
 }

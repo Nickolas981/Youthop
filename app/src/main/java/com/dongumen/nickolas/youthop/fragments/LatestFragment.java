@@ -20,7 +20,7 @@ public class LatestFragment extends Fragment {
     }
 
 
-    public static LatestFragment newInstance(String param1, String param2) {
+    public static LatestFragment newInstance() {
         LatestFragment fragment = new LatestFragment();
         Bundle args = new Bundle();
 

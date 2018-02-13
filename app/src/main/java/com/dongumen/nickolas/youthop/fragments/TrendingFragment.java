@@ -16,7 +16,7 @@ public class TrendingFragment extends Fragment {
     }
 
 
-    public static TrendingFragment newInstance(String param1, String param2) {
+    public static TrendingFragment newInstance() {
         TrendingFragment fragment = new TrendingFragment();
         return fragment;
     }

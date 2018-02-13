@@ -18,7 +18,7 @@ public class ApproachFragment extends Fragment {
     }
 
 
-    public static ApproachFragment newInstance(String param1, String param2) {
+    public static ApproachFragment newInstance() {
         ApproachFragment fragment = new ApproachFragment();
 
         return fragment;

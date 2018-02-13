@@ -4,35 +4,24 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item android:id="@+id/nav_home"
+            android:title="Home"/>
+        <item android:id="@+id/nav_competitions"
+            android:title="Competitions"/>
+        <item android:id="@+id/nav_conferences"
+            android:title="Conferences"/>
+        <item android:id="@+id/nav_exchange_programs"
+            android:title="Exchange Programs"/>
+        <item android:id="@+id/nav_fellowships"
+            android:title="Fellowships"/>
+        <item android:id="@+id/nav_internships"
+            android:title="Internships"/>
+        <item android:id="@+id/nav_scholarships"
+            android:title="Scholarships"/>
+        <item android:id="@+id/nav_workshops"
+            android:title="Workshops"/>
+        <item android:id="@+id/nav_miscellaneous"
+            android:title="Miscellaneous"/>
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
 
 </menu>

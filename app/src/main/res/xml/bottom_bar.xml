@@ -1,0 +1,14 @@
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home_black_24dp"
+        title="Home" />
+    <tab
+        id="@+id/tab_circle"
+        icon="@drawable/ic_user_black_24dp"
+        title="Circle" />
+    <tab
+        id="@+id/tab_chatbox"
+        icon="@drawable/ic_chat_black_24dp"
+        title="Chatbox" />
+</tabs>

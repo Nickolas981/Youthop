@@ -14,6 +14,9 @@ import android.view.MenuItem;
 
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
+import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -42,6 +45,15 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
         changeFragment(homeFragment);
+
+
+       /* DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("listItem");
+        OppListItem oppListItem = new OppListItem("Random", "Ivent", "Kyiv",
+                "https://firebasestorage.googleapis.com/v0/b/youthreplica.appspot.com/o/250px-Kyiv-2" +
+                        ".jpg?alt=media&token=6df3172e-5586-44d9-9832-0b9541c8ca8e", 1523732067L);
+        String id = mDatabase.push().getKey();
+
+        mDatabase.child(id).setValue(oppListItem);*/
     }
 
     @Override

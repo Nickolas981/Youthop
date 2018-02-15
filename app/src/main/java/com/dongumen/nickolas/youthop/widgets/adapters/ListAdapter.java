@@ -22,8 +22,8 @@ import butterknife.ButterKnife;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
 
-    Context context;
-    List<OppListItem> listItems = new ArrayList<>();
+    private Context context;
+    private List<OppListItem> listItems = new ArrayList<>();
 
     public void setListItems(List<OppListItem> listItems) {
         this.listItems = listItems;
@@ -44,6 +44,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         bindHolder(holder, listItems.get(position));
+        if (position == getItemCount() - 1){
+            holder.divider.setVisibility(View.INVISIBLE);
+        }else {
+            holder.divider.setVisibility(View.VISIBLE);
+        }
     }
 
     private void bindHolder(ViewHolder holder, OppListItem oppListItem) {
@@ -54,7 +59,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 .into(holder.image);
         holder.name.setText(oppListItem.name);
         holder.type.setText(oppListItem.type);
-
     }
 
     private void setDate(TextView date, long date1) {
@@ -81,6 +85,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         TextView date;
         @BindView(R.id.place)
         TextView place;
+        @BindView(R.id.divider)
+        View divider;
 
         ViewHolder(View v) {
             super(v);

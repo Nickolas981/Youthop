@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ListFragment extends MvpAppCompatFragment implements ListView, SwipeRefreshLayout.OnRefreshListener {
+public class ListFragment extends MvpAppCompatFragment implements ListView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -66,6 +66,7 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, v);
         refreshLayout.setOnRefreshListener(this);
+        tryAgainButton.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new ListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
@@ -88,7 +89,6 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
     public void onDetach() {
         super.onDetach();
     }
-
 
     @Override
     public void showList(List<OppListItem> list) {
@@ -116,7 +116,13 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
 
     @Override
     public void onRefresh() {
-        presenter.getList();
+        presenter.refresh();
     }
 
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.try_again)
+            presenter.tryAgainClicked();
+    }
 }

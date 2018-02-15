@@ -16,7 +16,6 @@ public class ListViewPresenter extends MvpPresenter<ListView> {
     ItemListDataSource dataSource = new ItemListDataSource();
     String lastId = "";
 
-
     public void getList(){
         RxFirebaseDatabase.observeSingleValueEvent(dataSource.getmDatabase().limitToFirst(10),
                 DataSnapshotMapper.listOf(OppListItem.class))

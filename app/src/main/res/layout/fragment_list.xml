@@ -13,7 +13,6 @@
         layout="@layout/loading_view"/>
 
     <include
-        android:id="@+id/error_view"
         layout="@layout/error_view"
         android:visibility="invisible"/>
 </FrameLayout>

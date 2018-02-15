@@ -26,14 +26,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ListFragment extends Fragment implements ListView {
+public class ListFragment extends MvpAppCompatFragment implements ListView {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
- /*   @InjectPresenter
+    @InjectPresenter
     ListViewPresenter presenter;
-*/
     ListAdapter adapter;
 
     public ListFragment() {
@@ -66,7 +65,7 @@ public class ListFragment extends Fragment implements ListView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        presenter.getList();
+        presenter.getList();
     }
 
     @Override
@@ -83,5 +82,6 @@ public class ListFragment extends Fragment implements ListView {
 
     @Override
     public void showList(List<OppListItem> list) {
+        adapter.setListItems(list);
     }
 }

@@ -12,22 +12,23 @@ import com.bumptech.glide.Glide;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
 
     Context context;
     List<OppListItem> listItems = new ArrayList<>();
 
+    public void setListItems(List<OppListItem> listItems) {
+        this.listItems = listItems;
+        notifyDataSetChanged();
+    }
 
     public ListAdapter(Context context) {
         this.context = context;
@@ -59,7 +60,7 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     private void setDate(TextView date, long date1) {
         Calendar curr = Calendar.getInstance();
         long millis2 = curr.getTimeInMillis();
-        long diff = date1 - millis2;
+        long diff = date1 * 1000 - millis2;
         long diffDays = diff / (24 * 60 * 60 * 1000);
         date.setText(String.valueOf(diffDays));
     }

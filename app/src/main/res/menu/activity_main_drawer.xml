@@ -6,22 +6,24 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_home"
             android:title="Home"/>
-        <item android:id="@+id/nav_competitions"
-            android:title="Competitions"/>
-        <item android:id="@+id/nav_conferences"
-            android:title="Conferences"/>
-        <item android:id="@+id/nav_exchange_programs"
-            android:title="Exchange Programs"/>
-        <item android:id="@+id/nav_fellowships"
-            android:title="Fellowships"/>
-        <item android:id="@+id/nav_internships"
-            android:title="Internships"/>
         <item android:id="@+id/nav_scholarships"
             android:title="Scholarships"/>
-        <item android:id="@+id/nav_workshops"
-            android:title="Workshops"/>
+        <item android:id="@+id/nav_fellowships"
+            android:title="Fellowships"/>
+        <item android:id="@+id/nav_jobs"
+            android:title="Jobs"/>
+        <item android:id="@+id/nav_internships"
+            android:title="Internships"/>
+        <item android:id="@+id/nav_conferences"
+            android:title="Conferences"/>
+        <item android:id="@+id/nav_competitions"
+            android:title="Competitions"/>
+        <item android:id="@+id/nav_grants"
+            android:title="Grants"/>
         <item android:id="@+id/nav_miscellaneous"
             android:title="Miscellaneous"/>
+        <item android:id="@+id/nav_add"
+            android:title="Add opportunity"/>
     </group>
 
 </menu>

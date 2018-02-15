@@ -47,15 +47,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
         changeFragment(homeFragment);
-
-
-       /* DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("listItem");
-        OppListItem oppListItem = new OppListItem("Random", "Ivent", "Kyiv",
-                "https://firebasestorage.googleapis.com/v0/b/youthreplica.appspot.com/o/250px-Kyiv-2" +
-                        ".jpg?alt=media&token=6df3172e-5586-44d9-9832-0b9541c8ca8e", 1523732067L);
-        String id = mDatabase.push().getKey();
-
-        mDatabase.child(id).setValue(oppListItem);*/
     }
 
     @Override
@@ -78,9 +69,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-      /*  if (id == R.id.action_settings) {
+        if (id == R.id.action_about_us) {
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("listItem");
+
+            String idd = mDatabase.push().getKey();
+            OppListItem oppListItem = new OppListItem("Ivent", "Kyiv", "https://firebasestorage.googleapis.com/v0/b/youthreplica.appspot.com/o/250px-Kyiv-2" +
+                    ".jpg?alt=media&token=6df3172e-5586-44d9-9832-0b9541c8ca8e", idd,"Random"
+                    , 1523732067L);
+            mDatabase.child(idd).setValue(oppListItem);
             return true;
-        }*/
+        }
 
         return super.onOptionsItemSelected(item);
     }

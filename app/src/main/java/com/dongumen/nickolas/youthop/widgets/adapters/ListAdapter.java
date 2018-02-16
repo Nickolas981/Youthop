@@ -1,6 +1,7 @@
 package com.dongumen.nickolas.youthop.widgets.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dongumen.nickolas.youthop.R;
+import com.dongumen.nickolas.youthop.activities.OppActivity;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -63,6 +65,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 .into(holder.image);
         holder.name.setText(oppListItem.name);
         holder.type.setText(oppListItem.type);
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, OppActivity.class);
+            context.startActivity(intent);
+        });
     }
 
     private void setDate(TextView date, long date1) {

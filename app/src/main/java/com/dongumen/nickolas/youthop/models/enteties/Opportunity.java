@@ -11,7 +11,7 @@ public class Opportunity extends OppListItem {
 
     public Opportunity(OppListItem oppListItem, String price, OppText oppText, OppUrls oppUrls) {
         super(oppListItem.type, oppListItem.place, oppListItem.imageId,
-                oppListItem.id, oppListItem.name, oppListItem.deadline);
+                oppListItem.id, oppListItem.name, oppListItem.deadline, oppListItem.dateCreated);
         this.price = price;
         this.oppText = oppText;
         this.oppUrls = oppUrls;

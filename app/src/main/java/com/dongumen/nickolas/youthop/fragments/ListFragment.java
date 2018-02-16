@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.dongumen.nickolas.youthop.R;
+import com.dongumen.nickolas.youthop.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 import com.dongumen.nickolas.youthop.presenters.ListViewPresenter;
 import com.dongumen.nickolas.youthop.view.ListView;
@@ -39,6 +40,8 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout refreshLayout;
 
+    public QueryTypes type;
+
 
     @InjectPresenter
     ListViewPresenter presenter;
@@ -49,8 +52,9 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
     }
 
 
-    public static ListFragment newInstance() {
+    public static ListFragment newInstance(QueryTypes t) {
         ListFragment fragment = new ListFragment();
+        fragment.type = t;
         return fragment;
     }
 
@@ -76,7 +80,7 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.getList();
+        presenter.getList(type);
     }
 
     @Override
@@ -116,13 +120,13 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
 
     @Override
     public void onRefresh() {
-        presenter.refresh();
+        presenter.refresh(type);
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.try_again)
-            presenter.tryAgainClicked();
+            presenter.tryAgainClicked(type);
     }
 }

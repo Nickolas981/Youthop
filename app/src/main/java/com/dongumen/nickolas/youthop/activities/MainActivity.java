@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
 
     Integer container = R.id.container;
     HomeFragment homeFragment;
-    int notifications = 5;
+    int notifications = 0;
 
     private TextView notificationBadge;
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity
             String idd = mDatabase.push().getKey();
             OppListItem oppListItem = new OppListItem("Ivent", "Kyiv", "https://firebasestorage.googleapis.com/v0/b/youthreplica.appspot.com/o/250px-Kyiv-2" +
                     ".jpg?alt=media&token=6df3172e-5586-44d9-9832-0b9541c8ca8e", idd,"Random"
-                    , 1523732067L);
+                    , 1523732067L, System.currentTimeMillis());
             mDatabase.child(idd).setValue(oppListItem);
             return true;
         }

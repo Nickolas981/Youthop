@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongumen.nickolas.youthop.R;
+import com.dongumen.nickolas.youthop.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.widgets.adapters.ViewPagerAdapter;
 
 
@@ -41,9 +42,9 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         ViewPager viewPager = v.findViewById(R.id.pager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(ListFragment.newInstance(), "Latest");
-        adapter.addFragment(ListFragment.newInstance(), "Trending");
-        adapter.addFragment(ListFragment.newInstance(), "Approach");
+        adapter.addFragment(ListFragment.newInstance(QueryTypes.Latest), "Latest");
+        adapter.addFragment(ListFragment.newInstance(QueryTypes.Latest), "Trending");
+        adapter.addFragment(ListFragment.newInstance(QueryTypes.Approach), "Approach");
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = v.findViewById(R.id.tabs);

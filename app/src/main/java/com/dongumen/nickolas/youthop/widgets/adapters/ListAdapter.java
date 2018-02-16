@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,10 +54,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     private void bindHolder(ViewHolder holder, OppListItem oppListItem) {
-        setDate(holder.date, oppListItem.date);
+        setDate(holder.date, oppListItem.deadline);
         holder.place.setText(oppListItem.place);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images");
+
         Glide.with(context)
-                .load(oppListItem.url)
+                .load(storageReference.child(oppListItem.imageId))
                 .into(holder.image);
         holder.name.setText(oppListItem.name);
         holder.type.setText(oppListItem.type);
@@ -64,7 +68,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private void setDate(TextView date, long date1) {
         Calendar curr = Calendar.getInstance();
         long millis2 = curr.getTimeInMillis();
-        long diff = date1 * 1000 - millis2;
+        long diff = date1 - millis2;
         long diffDays = diff / (24 * 60 * 60 * 1000);
         date.setText(String.valueOf(diffDays));
     }

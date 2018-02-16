@@ -8,15 +8,15 @@ import java.util.List;
 
 public class OppText {
     public String description, location, eligibleRegions;
-    public List<String> benefits, elasticities;
+    public List<String> benefits, eligibilities;
 
     public OppText(String description, String location,
-                   String eligibleRegions, List<String> benefits, List<String> elasticities) {
+                   String eligibleRegions, List<String> benefits, List<String> eligibilities) {
         this.description = description;
         this.location = location;
         this.eligibleRegions = eligibleRegions;
         this.benefits = benefits;
-        this.elasticities = elasticities;
+        this.eligibilities = eligibilities;
     }
 
     public OppText() {

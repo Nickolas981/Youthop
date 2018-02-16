@@ -3,18 +3,18 @@ package com.dongumen.nickolas.youthop.models.enteties;
 
 public class OppListItem {
 
-    public String type, place, url, id, name;
-    public long date;
+    public String type, place, imageId, id, name;
+    public long deadline;
 
     public OppListItem() {
     }
 
-    public OppListItem(String type, String place, String url, String id, String name, long date) {
+    public OppListItem(String type, String place, String imageId, String id, String name, long deadline ) {
         this.type = type;
         this.place = place;
-        this.url = url;
+        this.imageId = imageId;
         this.id = id;
         this.name = name;
-        this.date = date;
+        this.deadline = deadline;
     }
 }

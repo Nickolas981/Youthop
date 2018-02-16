@@ -42,9 +42,9 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         ViewPager viewPager = v.findViewById(R.id.pager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(ListFragment.newInstance(QueryTypes.Latest), "Latest");
-        adapter.addFragment(ListFragment.newInstance(QueryTypes.Latest), "Trending");
-        adapter.addFragment(ListFragment.newInstance(QueryTypes.Approach), "Approach");
+        adapter.addFragment(ListFragment.newInstance(QueryTypes.Latest), "New");
+        adapter.addFragment(ListFragment.newInstance(QueryTypes.Latest), "Popular");
+        adapter.addFragment(ListFragment.newInstance(QueryTypes.Approach), "Ending");
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = v.findViewById(R.id.tabs);

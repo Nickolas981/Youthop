@@ -28,8 +28,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".activities.SearchActivity"
-            android:theme="@style/Theme.SearchTheme"/>
+        <activity
+            android:name=".activities.SearchActivity"
+            android:theme="@style/Theme.SearchTheme" />
+        <activity android:name=".activities.OppActivity"></activity>
     </application>
 
 </manifest>

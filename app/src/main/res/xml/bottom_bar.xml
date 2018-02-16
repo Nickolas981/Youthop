@@ -8,19 +8,16 @@
         icon="@drawable/ic_circle_black_24dp"
         title="SDGs" />
     <tab
-        id="@+id/tab_explode"
-        icon="@drawable/ic_compass_black_24dp"
-        title="Chatbox" />
-
-
-    <tab
         id="@+id/tab_chatbox"
         icon="@drawable/ic_chat_black_24dp"
         title="Chatbox" />
-
+    <tab
+        id="@+id/tab_explode"
+        icon="@drawable/ic_compass_black_24dp"
+        title="Explode" />
     <tab
         id="@+id/tab_success_stories"
         icon="@drawable/ic_user_black_24dp"
-        title="Success stories" />
+        title="Success" />
 
 </tabs>

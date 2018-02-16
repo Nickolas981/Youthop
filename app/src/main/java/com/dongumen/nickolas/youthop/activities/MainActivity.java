@@ -1,5 +1,6 @@
 package com.dongumen.nickolas.youthop.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -15,23 +16,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
-import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     Integer container = R.id.container;
     HomeFragment homeFragment;
     int notifications = 0;
 
     private TextView notificationBadge;
+
+    @BindView(R.id.bottomBar)
+    BottomBar bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
         homeFragment = HomeFragment.newInstance();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -51,10 +56,41 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(int tabId) {
+                switch (tabId) {
+                    case R.id.tab_home:
+                        changeFragment(homeFragment);
+                        break;
+                    case R.id.tab_chatbox:
+                    case R.id.tab_explode:
+                    case R.id.tab_sdg:
+                    case R.id.tab_success_stories:
+                        showDialog();
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+        });
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
         changeFragment(homeFragment);
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Hand's tight, exciting features coming in next update soon!")
+                .setCancelable(true)
+                .setPositiveButton("OK", (dialog, id) -> {
+                    dialog.cancel();
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
@@ -74,27 +110,23 @@ public class MainActivity extends AppCompatActivity
         View actionView = MenuItemCompat.getActionView(menuItem);
         notificationBadge = actionView.findViewById(R.id.bell_badge);
 
-        if (notifications != 0){
+        if (notifications != 0) {
             notificationBadge.setVisibility(View.VISIBLE);
             notificationBadge.setText(String.valueOf(Math.min(notifications, 99)));
-        }else {
+        } else {
             notificationBadge.setVisibility(View.GONE);
         }
-
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_search) {
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -103,11 +135,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.nav_home: {
                 changeFragment(homeFragment);
             }
-            default:{
+            default: {
                 //TODO: ??
             }
         }

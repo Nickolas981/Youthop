@@ -1,5 +1,6 @@
 package com.dongumen.nickolas.youthop.activities;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.dongumen.nickolas.youthop.R;
@@ -87,14 +89,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_about_us) {
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("listItem");
-
-            String idd = mDatabase.push().getKey();
-            OppListItem oppListItem = new OppListItem("Ivent", "Kyiv", "https://firebasestorage.googleapis.com/v0/b/youthreplica.appspot.com/o/250px-Kyiv-2" +
-                    ".jpg?alt=media&token=6df3172e-5586-44d9-9832-0b9541c8ca8e", idd,"Random"
-                    , 1523732067L, System.currentTimeMillis());
-            mDatabase.child(idd).setValue(oppListItem);
+        if (id == R.id.action_search) {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
             return true;
         }
 

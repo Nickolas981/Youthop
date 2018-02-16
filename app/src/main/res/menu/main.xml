@@ -14,6 +14,11 @@
         android:title="Cart"
         app:actionLayout="@layout/bell_action_item_layout"
         app:showAsAction="always"/>
+    <item android:id="@+id/action_bookmark"
+        android:icon="@drawable/ic_bookmark_black_24dp"
+        android:title="Bookmarks"
+        app:showAsAction="always"/>
+
     <item
         android:id="@+id/action_about_us"
         android:orderInCategory="100"

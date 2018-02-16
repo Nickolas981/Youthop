@@ -6,12 +6,15 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity
 
     Integer container = R.id.container;
     HomeFragment homeFragment;
+    int notifications = 5;
+
+    private TextView notificationBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +68,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        final MenuItem menuItem = menu.findItem(R.id.action_bell);
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        notificationBadge = actionView.findViewById(R.id.bell_badge);
+
+        if (notifications != 0){
+            notificationBadge.setVisibility(View.VISIBLE);
+            notificationBadge.setText(String.valueOf(Math.min(notifications, 99)));
+        }else {
+            notificationBadge.setVisibility(View.GONE);
+        }
+
+
         return true;
     }
 

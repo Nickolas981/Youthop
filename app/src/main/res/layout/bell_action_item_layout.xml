@@ -1,0 +1,28 @@
+<FrameLayout
+    style="?attr/actionButtonStyle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:focusable="true">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_bell_black_24dp"/>
+
+    <TextView
+        android:id="@+id/bell_badge"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_gravity="right|end|top"
+        android:layout_marginEnd="-3dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/badge_background"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:text="99"
+        android:textSize="10sp"/>
+
+</FrameLayout>

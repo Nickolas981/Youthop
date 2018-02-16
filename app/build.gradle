@@ -44,6 +44,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.9'
     compile 'com.github.frangsierra:rx2firebase:1.4.0'
-
 }
 apply plugin: 'com.google.gms.google-services'

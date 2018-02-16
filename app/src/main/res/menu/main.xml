@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_bell"
+        android:icon="@drawable/ic_bell_black_24dp"
+        android:title="Cart"
+        app:actionLayout="@layout/bell_action_item_layout"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_about_us"
         android:orderInCategory="100"

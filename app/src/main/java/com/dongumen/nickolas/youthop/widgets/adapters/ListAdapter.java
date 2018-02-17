@@ -34,7 +34,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public ListAdapter(Context context) {
+    public ListAdapter(Context context, List<OppListItem> list) {
+        listItems = list;
         this.context = context;
     }
 

@@ -58,7 +58,7 @@ public class SearchActivity extends MvpAppCompatActivity implements SearchView {
                 presenter.search(editable.toString());
             }
         });
-        adapter = new ListAdapter(this);
+//        adapter = new ListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -73,7 +73,7 @@ public class SearchActivity extends MvpAppCompatActivity implements SearchView {
 
     @Override
     public void showList(List<OppListItem> list) {
-        adapter.setListItems(list);
+//        adapter.setListItems(list);
     }
 
     @Override
@@ -85,4 +85,6 @@ public class SearchActivity extends MvpAppCompatActivity implements SearchView {
     public void showLoading() {
 
     }
+
+
 }

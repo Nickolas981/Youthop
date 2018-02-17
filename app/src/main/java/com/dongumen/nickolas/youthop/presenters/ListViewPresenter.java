@@ -8,6 +8,7 @@ import com.dongumen.nickolas.youthop.models.remote.ItemListDataSource;
 import com.dongumen.nickolas.youthop.view.ListView;
 import com.google.firebase.database.Query;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -18,27 +19,43 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 @InjectViewState
 public class ListViewPresenter extends MvpPresenter<ListView> {
     ItemListDataSource dataSource = new ItemListDataSource();
-    String lastId = "";
-    long lastDeadline = 0;
+    long lastDate ;
 
     public void getList(QueryTypes type) {
         Query query;
         if (type == QueryTypes.Latest){
-            query = dataSource.getmDatabase().limitToLast(10).orderByChild("dateCreated");
+            query = dataSource.getmDatabase().limitToFirst(10).orderByChild("dateCreated");
+//            query = dataSource.getmDatabase().limitToLast(10).orderByChild("dateCreated");
         }else if (type == QueryTypes.Approach){
             query = dataSource.getmDatabase().limitToFirst(10).orderByChild("deadline");
         }else {
             query = dataSource.getmDatabase().limitToLast(10).orderByChild("deadline");
         }
 
+        if (lastDate != 0) {
+//            if (type == QueryTypes.Approach){
+//                query = query.endAt(lastDate);
+//            }else {
+                query =  query.startAt(lastDate);
+//            }
+        }
         RxFirebaseDatabase.observeSingleValueEvent(query,
                 DataSnapshotMapper.listOf(OppListItem.class))
                 .timeout(5, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .map(oppListItems -> {
-                    lastId = oppListItems.get(oppListItems.size() - 1).id;
-                    if (type == QueryTypes.Latest){
-                        Collections.reverse(oppListItems);
+                    long newDate;
+                    if (type == QueryTypes.Latest) {
+                        newDate = oppListItems.get(oppListItems.size() - 1).dateCreated;
+                    } else {
+                        newDate = oppListItems.get(oppListItems.size() - 1).deadline;
                     }
+                    if (newDate == lastDate)
+                        return new ArrayList<OppListItem>();
+                    lastDate = newDate;
+//                    if (type == QueryTypes.Latest){
+//                        Collections.reverse(oppListItems);
+//                    }
+
                     return oppListItems;
                 })
                 .subscribe(items -> getViewState().showList(items),
@@ -47,12 +64,12 @@ public class ListViewPresenter extends MvpPresenter<ListView> {
 
     public void tryAgainClicked(QueryTypes type) {
         getViewState().showLoading();
-        lastId = "";
+        lastDate = 0;
         getList(type);
     }
 
     public void refresh(QueryTypes type){
-        lastId = "";
+        lastDate = 0;
         getList(type);
     }
 }

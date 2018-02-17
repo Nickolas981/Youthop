@@ -11,16 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.dongumen.nickolas.youthop.App;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 import com.dongumen.nickolas.youthop.presenters.ListViewPresenter;
 import com.dongumen.nickolas.youthop.view.ListView;
 import com.dongumen.nickolas.youthop.widgets.adapters.ListAdapter;
+import com.dongumen.nickolas.youthop.widgets.listeners.EndlessRecyclerViewScrollListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -43,6 +47,12 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
     public QueryTypes type;
 
 
+    List<OppListItem> listItems;
+
+    public EndlessRecyclerViewScrollListener listener;
+    public LinearLayoutManager linearLayoutManager;
+
+
     @InjectPresenter
     ListViewPresenter presenter;
     ListAdapter adapter;
@@ -61,7 +71,7 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        listItems = new ArrayList<>();
     }
 
     @Override
@@ -69,10 +79,21 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, v);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        listener = new EndlessRecyclerViewScrollListener() {
+            @Override
+            public void onLoadMore() {
+                presenter.getList(type);
+            }
+
+        };
         refreshLayout.setOnRefreshListener(this);
         tryAgainButton.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new ListAdapter(getActivity());
+        adapter = new ListAdapter(getActivity(), listItems);
+        recyclerView.setOnScrollListener(listener);
         recyclerView.setAdapter(adapter);
         return v;
     }
@@ -96,7 +117,13 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
 
     @Override
     public void showList(List<OppListItem> list) {
-        adapter.setListItems(list);
+        for (OppListItem item: list){
+            if (!listItems.contains(item)){
+                listItems.add(item);
+            }
+        }
+        adapter.notifyDataSetChanged();
+//        adapter.setListItems(list);
         errorView.setVisibility(View.INVISIBLE);
         loadingView.setVisibility(View.INVISIBLE);
         refreshLayout.setVisibility(View.VISIBLE);

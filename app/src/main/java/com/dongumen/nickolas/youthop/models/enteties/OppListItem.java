@@ -18,4 +18,21 @@ public class OppListItem {
         this.deadline = deadline;
         this.dateCreated = dateCreated;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof OppListItem)) {
+            return false;
+        }
+        OppListItem other = (OppListItem) obj;
+        return this.id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+            return id.hashCode();
+    }
 }

@@ -68,6 +68,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.type.setText(oppListItem.type);
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, OppActivity.class);
+            intent.putExtra("id", oppListItem.id);
             context.startActivity(intent);
         });
     }

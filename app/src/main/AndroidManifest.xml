@@ -32,7 +32,7 @@
             android:name=".activities.SearchActivity"
             android:theme="@style/Theme.SearchTheme" />
         <activity android:name=".activities.OppActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/Theme.OppTheme"/>
     </application>
 
 </manifest>

@@ -1,8 +1,6 @@
 package com.dongumen.nickolas.youthop.models.enteties;
 
-/**
- * Created by Nickolas on 16.02.2018.
- */
+
 
 public class Opportunity extends OppListItem {
     public String price;

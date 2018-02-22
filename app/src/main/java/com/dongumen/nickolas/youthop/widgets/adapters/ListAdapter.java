@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dongumen.nickolas.youthop.utils.DateUtil;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.activities.OppActivity;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
@@ -17,7 +18,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,7 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     private void bindHolder(ViewHolder holder, OppListItem oppListItem) {
-        setDate(holder.date, oppListItem.deadline);
+        holder.date.setText(DateUtil.getDeadlineDays(oppListItem.deadline));
         holder.place.setText(oppListItem.place);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images");
 
@@ -71,14 +71,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             intent.putExtra("id", oppListItem.id);
             context.startActivity(intent);
         });
-    }
-
-    private void setDate(TextView date, long date1) {
-        Calendar curr = Calendar.getInstance();
-        long millis2 = curr.getTimeInMillis();
-        long diff = date1 - millis2;
-        long diffDays = diff / (24 * 60 * 60 * 1000);
-        date.setText(String.valueOf(diffDays));
     }
 
     @Override

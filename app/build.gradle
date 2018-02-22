@@ -43,8 +43,10 @@ dependencies {
     compile 'com.arello-mobile:moxy-app-compat:1.5.3'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.1'
     implementation 'com.github.bumptech.glide:glide:4.6.1'
+    compile 'com.r0adkll:slidableactivity:2.0.6'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.9'
     compile 'com.github.frangsierra:rx2firebase:1.4.0'
+    compile 'com.gjiazhe:PanoramaImageView:1.0'
 }
 apply plugin: 'com.google.gms.google-services'

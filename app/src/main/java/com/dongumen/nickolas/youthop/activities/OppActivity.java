@@ -1,12 +1,12 @@
 package com.dongumen.nickolas.youthop.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.models.enteties.Opportunity;
 import com.dongumen.nickolas.youthop.presenters.OppPresenter;
+import com.dongumen.nickolas.youthop.utils.BookmarkUtil;
 import com.dongumen.nickolas.youthop.utils.DateUtil;
 import com.dongumen.nickolas.youthop.view.OppView;
 import com.gjiazhe.panoramaimageview.GyroscopeObserver;
@@ -50,12 +51,16 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
     TextView description;
     @BindView(R.id.bottom_bar)
     View bottomBar;
+    MenuItem bookmark;
 
     private Opportunity opportunity;
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images");
     private GyroscopeObserver gyroscopeObserver;
+    private BookmarkUtil bookmarkUtil;
+    MenuItem.OnMenuItemClickListener bookmarkEnabled, bookmarkDisabled;
+
 
     String id = "";
 
@@ -66,15 +71,31 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
         gyroscopeObserver = new GyroscopeObserver();
         gyroscopeObserver.setMaxRotateRadian(Math.PI / 9);
         opportunity = new Opportunity();
+        bookmarkUtil = new BookmarkUtil(this);
         Slidr.attach(this);
         ButterKnife.bind(this);
-        setOnClick();
+        initListeners();
         image.setGyroscopeObserver(gyroscopeObserver);
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         id = getIntent().getStringExtra("id");
         presenter.loadOpp(id);
+    }
+
+    private void initListeners() {
+        bookmarkDisabled = view -> {
+            bookmark.setIcon(R.drawable.ic_bookmark_fill_black_24dp);
+            bookmarkUtil.addBookmark(opportunity.id);
+            bookmark.setOnMenuItemClickListener(bookmarkEnabled);
+            return true;
+        };
+        bookmarkEnabled = view -> {
+            bookmark.setIcon(R.drawable.ic_bookmark_black_24dp);
+            bookmarkUtil.deleteBookmark(opportunity.id);
+            bookmark.setOnMenuItemClickListener(bookmarkDisabled);
+            return true;
+        };
     }
 
     @Override
@@ -112,81 +133,48 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
         description.setText(opportunity.oppText.description);
     }
 
-    private void setOnClick() {
-        button.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_EDIT);
-            intent.setType("vnd.android.cursor.item/event");
-            intent.putExtra(CalendarContract.Events.TITLE, opportunity.name);
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-                    opportunity.dates.start);
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
-                    opportunity.dates.end);
-            intent.putExtra(CalendarContract.Events.ALL_DAY, false);// periodicity
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, opportunity.type);
-            startActivity(intent);
-        });
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_opp_menu, menu);
+        bookmark = menu.findItem(R.id.action_bookmark);
+        if (bookmarkUtil.getBookmarkList().contains(opportunity.id)) {
+            bookmark.setIcon(R.drawable.ic_bookmark_fill_black_24dp);
+            bookmark.setOnMenuItemClickListener(bookmarkEnabled);
+        } else {
+            bookmark.setIcon(R.drawable.ic_bookmark_black_24dp);
+            bookmark.setOnMenuItemClickListener(bookmarkDisabled);
+        }
         return true;
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        String message = "YouthShapers \n" + opportunity.name + "\nDeadline: "
-                + DateUtil.getDateFrormated(opportunity.deadline) + "\nTime Left: " +
-                DateUtil.getDeadlineDays(opportunity.deadline) + "\nRegion: " +
-                opportunity.place;
-        Intent intent = new Intent(Intent.ACTION_SEND);
         switch (id) {
             case R.id.share:
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, message);
-                Intent.createChooser(intent, "Share via");
-                startActivity(intent);
+                presenter.share(opportunity, this);
                 break;
             case R.id.twitter:
-                String url = "http://www.twitter.com/intent/tweet?text=" + message;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                presenter.shareTwitter(opportunity, this);
                 break;
             case R.id.viber:
-                intent.setPackage("com.viber.voip");
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, message);
-                try {
-                    startActivity(intent);
-                } catch (Exception e) {
-                    toast("No Viber...");
-                }
+                presenter.shareViber(opportunity, this);
                 break;
             case R.id.whatsapp:
-                intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, message);
-                intent.setType("text/plain");
-                intent.setPackage("com.whatsapp");
-                try {
-                    startActivity(intent);
-                } catch (Exception e) {
-                    toast("No Whatsapp...");
-                }
+                presenter.shareWhatsapp(opportunity, this);
                 break;
             case R.id.mail:
-                intent.setType("message/rfc822");
-                intent.putExtra(Intent.EXTRA_SUBJECT, opportunity.name);
-                intent.putExtra(Intent.EXTRA_TEXT, message);
-                try {
-                    startActivity(Intent.createChooser(intent, "Send mail..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    toast("No mail app...");
-                }
+               presenter.shareMail(opportunity, this);
                 break;
             case R.id.facebook:
+                break;
+            case R.id.fab:
+                presenter.shareCalendar(opportunity, this);
                 break;
             default:
                 Toast.makeText(this, "Not defined", Toast.LENGTH_SHORT).show();
@@ -194,7 +182,4 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
         }
     }
 
-    void toast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
 }

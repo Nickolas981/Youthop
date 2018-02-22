@@ -9,4 +9,5 @@ import com.dongumen.nickolas.youthop.models.enteties.Opportunity;
 
 public interface OppView extends MvpView {
     void showOpp(Opportunity opportunity);
+    void showToast(String str);
 }

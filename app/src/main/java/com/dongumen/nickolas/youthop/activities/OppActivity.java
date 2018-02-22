@@ -1,8 +1,6 @@
 package com.dongumen.nickolas.youthop.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
@@ -51,6 +49,8 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
     TextView description;
     @BindView(R.id.bottom_bar)
     View bottomBar;
+    @BindView(R.id.price)
+    TextView price;
     MenuItem bookmark;
 
     private Opportunity opportunity;
@@ -127,6 +127,7 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
                 .into(image);
         type.setText(opportunity.type);
         name.setText(opportunity.name);
+        price.setText(opportunity.price);
         timeLeft.append(DateUtil.getDeadlineDays(opportunity.deadline));
         location.setText(opportunity.place);
         deadline.append(DateUtil.getDateFrormated(opportunity.deadline));
@@ -169,7 +170,7 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
                 presenter.shareWhatsapp(opportunity, this);
                 break;
             case R.id.mail:
-               presenter.shareMail(opportunity, this);
+                presenter.shareMail(opportunity, this);
                 break;
             case R.id.facebook:
                 break;

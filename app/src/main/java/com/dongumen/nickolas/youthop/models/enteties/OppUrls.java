@@ -5,13 +5,11 @@ package com.dongumen.nickolas.youthop.models.enteties;
  */
 
 public class OppUrls {
-    public String applyNowUrl, linkUrl, facebookUrl, twitterUrl;
+    public String applyNowUrl, linkUrl;
 
-    public OppUrls(String applyNowUrl, String linkUrl, String facebookUrl, String twitterUrl) {
+    public OppUrls(String applyNowUrl, String linkUrl) {
         this.applyNowUrl = applyNowUrl;
         this.linkUrl = linkUrl;
-        this.facebookUrl = facebookUrl;
-        this.twitterUrl = twitterUrl;
     }
 
     public OppUrls() {

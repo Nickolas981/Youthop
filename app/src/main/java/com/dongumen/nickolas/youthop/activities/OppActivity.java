@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.r0adkll.slidr.Slidr;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -41,8 +44,8 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
     TextView deadline;
     @BindView(R.id.time_left)
     TextView timeLeft;
-    @BindView(R.id.location)
-    TextView location;
+    @BindView(R.id.place)
+    TextView place;
     @BindView(R.id.fab)
     FloatingActionButton button;
     @BindView(R.id.description)
@@ -51,7 +54,21 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
     View bottomBar;
     @BindView(R.id.price)
     TextView price;
+    @BindView(R.id.location)
+    TextView location;
     MenuItem bookmark;
+    @BindView(R.id.benefits_container)
+    View benefitContainer;
+    @BindView(R.id.benefits)
+    LinearLayout benefitsList;
+    @BindView(R.id.eligibilities_container)
+    View eligibilitiesContainer;
+    @BindView(R.id.eligibilities)
+    LinearLayout eligibilitiesList;
+    @BindView(R.id.eligible_regions)
+    TextView eligibleRegions;
+
+
 
     private Opportunity opportunity;
 
@@ -129,9 +146,29 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
         name.setText(opportunity.name);
         price.setText(opportunity.price);
         timeLeft.append(DateUtil.getDeadlineDays(opportunity.deadline));
-        location.setText(opportunity.place);
+        place.setText(opportunity.place);
         deadline.append(DateUtil.getDateFrormated(opportunity.deadline));
         description.setText(opportunity.oppText.description);
+        location.setText(opportunity.oppText.location);
+        if (opportunity.oppText.benefits != null && !opportunity.oppText.benefits.isEmpty()) {
+            benefitContainer.setVisibility(View.VISIBLE);
+            loadList(opportunity.oppText.benefits, benefitsList);
+        }
+        if (opportunity.oppText.eligibilities != null && !opportunity.oppText.eligibilities.isEmpty()) {
+            eligibilitiesContainer.setVisibility(View.VISIBLE);
+            loadList(opportunity.oppText.eligibilities, eligibilitiesList);
+        }
+        eligibleRegions.setText(opportunity.oppText.eligibleRegions);
+    }
+
+
+    public void loadList(List<String> list, LinearLayout l) {
+        for (String benefit : list) {
+            View view = getLayoutInflater().inflate(R.layout.text_item, null);
+            TextView textView = view.findViewById(R.id.text);
+            textView.setText(benefit);
+            l.addView(view);
+        }
     }
 
     @Override
@@ -176,6 +213,12 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
                 break;
             case R.id.fab:
                 presenter.shareCalendar(opportunity, this);
+                break;
+            case R.id.apply_now:
+                presenter.applyNow(opportunity, this);
+                break;
+            case R.id.official_link:
+                presenter.officialLink(opportunity, this);
                 break;
             default:
                 Toast.makeText(this, "Not defined", Toast.LENGTH_SHORT).show();

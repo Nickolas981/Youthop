@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity
         final MenuItem menuItem = menu.findItem(R.id.action_bell);
         View actionView = MenuItemCompat.getActionView(menuItem);
         notificationBadge = actionView.findViewById(R.id.bell_badge);
-
         if (notifications != 0) {
             notificationBadge.setVisibility(View.VISIBLE);
             notificationBadge.setText(String.valueOf(Math.min(notifications, 99)));

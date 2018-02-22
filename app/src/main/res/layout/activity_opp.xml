@@ -11,6 +11,7 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -25,16 +26,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_thin"
-                android:textStyle="bold"
-                android:text="Competitions" />
+                android:text="Competitions"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/roboto"
                 android:text="Some random Contenst"
-                android:layout_marginBottom="5dp"
                 android:textSize="24sp" />
 
             <LinearLayout
@@ -45,30 +46,31 @@
                 <LinearLayout
                     android:id="@+id/location_container"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:paddingStart="-5dp"
                         android:layout_height="20dp"
+                        android:paddingStart="-5dp"
                         android:src="@drawable/ic_place_black_24dp" />
 
                     <TextView
-                        android:id="@+id/location"
+                        android:id="@+id/place"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/roboto_thin"
-                        android:textStyle="bold"
                         android:gravity="center"
-                        android:text="Online" />
+                        android:text="Online"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/price_container"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -81,9 +83,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/roboto_thin"
-                        android:textStyle="bold"
                         android:gravity="center"
-                        android:text="Price" />
+                        android:text="Price"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -104,8 +106,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto_thin"
-                    android:textStyle="bold"
-                    android:text="DEADLINE -   " />
+                    android:text="DEADLINE -   "
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/time_left"
@@ -113,9 +115,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto_thin"
-                    android:textStyle="bold"
-                    android:text="TIME LEFT -   " />
+                    android:text="TIME LEFT -   "
+                    android:textStyle="bold" />
             </LinearLayout>
+
 
             <TextView
                 android:id="@+id/description"
@@ -123,22 +126,156 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp" />
 
-            <ListView
-                android:id="@+id/content_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Location: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/benefits_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Benefits"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/benefits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/eligibilities_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginBottom="5dp"
+                    android:text="Eligibilities"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/eligibilities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Eligible Regions: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/eligible_regions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/apply_now"
+                    android:layout_width="150dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="30dp"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:layout_gravity="start"
+                    android:background="@color/colorPrimary"
+                    android:text="Apply Now"
+                    android:onClick="onClick"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textStyle="bold"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/official_link"
+                    android:layout_width="150dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="30dp"
+                    android:paddingEnd="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="onClick"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingStart="20dp"
+                    android:layout_gravity="end"
+                    android:background="@color/colorPrimary"
+                    android:text="OFFICIAL LINK"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:onClick="onClick"
         style="@style/FabStyle"
+        android:onClick="onClick"
         android:visibility="gone"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|right|end" />
 
-   <include layout="@layout/bottom_opp_bar"/>
+    <include layout="@layout/bottom_opp_bar" />
 
 </android.support.design.widget.CoordinatorLayout>

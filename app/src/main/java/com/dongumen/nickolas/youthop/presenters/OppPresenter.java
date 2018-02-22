@@ -8,6 +8,7 @@ import android.provider.CalendarContract;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.dongumen.nickolas.youthop.activities.OppActivity;
 import com.dongumen.nickolas.youthop.models.enteties.Opportunity;
 import com.dongumen.nickolas.youthop.models.remote.OppDataSource;
 import com.dongumen.nickolas.youthop.utils.DateUtil;
@@ -102,5 +103,19 @@ public class OppPresenter extends MvpPresenter<OppView> {
         intent.putExtra(CalendarContract.Events.ALL_DAY, false);// periodicity
         intent.putExtra(CalendarContract.Events.DESCRIPTION, opportunity.type);
         context.startActivity(intent);
+    }
+
+    public void applyNow(Opportunity opportunity, OppActivity oppActivity) {
+        String url = opportunity.oppUrls.applyNowUrl;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        oppActivity.startActivity(i);
+    }
+
+    public void officialLink(Opportunity opportunity, OppActivity oppActivity) {
+        String url = opportunity.oppUrls.linkUrl;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        oppActivity.startActivity(i);
     }
 }

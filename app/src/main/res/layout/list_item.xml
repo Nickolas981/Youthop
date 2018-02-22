@@ -3,6 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:background="#fff"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:orientation="horizontal">
 
     <ImageView
@@ -26,8 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/roboto_thin"
-            android:singleLine="true"
-            android:text="Ivent" />
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/name"
@@ -35,7 +37,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:maxLines="2"
-            android:text="Randomsfsdfsdfsdfsdfsdfsdfsfd something"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -47,21 +48,18 @@
                 android:id="@+id/place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
-                android:text="Italy" />
+                android:fontFamily="@font/roboto_thin" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
-                android:text=" | " />
+                android:fontFamily="@font/roboto_thin"/>
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
-                android:text="40 days" />
+                android:fontFamily="@font/roboto_thin"/>
         </LinearLayout>
 
         <FrameLayout

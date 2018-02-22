@@ -1,0 +1,80 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_gravity="bottom"
+    android:background="@color/very_light_gray"
+    android:orientation="horizontal"
+    android:id="@+id/bottom_bar"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/facebook"
+        android:clickable="true"
+        android:layout_width="0dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_height="wrap_content"
+        android:padding="13dp"
+        android:layout_weight="1"
+        android:src="@drawable/facebook"
+        android:onClick="onClick"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/twitter"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_weight="1"
+        android:src="@drawable/twitter"
+        android:onClick="onClick"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/viber"
+        android:layout_width="0dp"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:padding="13dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_weight="1"
+        android:src="@drawable/viber"
+        android:onClick="onClick"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/whatsapp"
+        android:layout_width="0dp"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="13dp"
+        android:layout_weight="1"
+        android:src="@drawable/whatsapp"
+        android:onClick="onClick"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/mail"
+        android:layout_width="0dp"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="15dp"
+        android:layout_weight="1"
+        android:src="@drawable/mail"
+        android:onClick="onClick"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/share"
+        android:layout_width="0dp"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="15dp"
+        android:layout_weight="1"
+        android:src="@drawable/share"
+        android:onClick="onClick"
+        android:focusable="true" />
+</LinearLayout>

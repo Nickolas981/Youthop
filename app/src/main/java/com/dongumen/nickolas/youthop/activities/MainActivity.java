@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
+import com.dongumen.nickolas.youthop.utils.BookmarkUtil;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             notificationBadge.setVisibility(View.GONE);
         }
+
         return true;
     }
 
@@ -125,6 +127,9 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
             return true;
+        }else if (id == R.id.action_bookmark){
+            Intent intent = new Intent(this, BookmarkActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

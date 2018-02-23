@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.dongumen.nickolas.youthop.ApplicationConstants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,7 +17,8 @@ public class BookmarkUtil {
 
     public BookmarkUtil(Activity activity) {
         if (sharedPreferences == null)
-            sharedPreferences = activity.getPreferences(Context.MODE_PRIVATE);
+            sharedPreferences = activity
+                    .getSharedPreferences(ApplicationConstants.PREFERENCES, Context.MODE_PRIVATE);
     }
 
     public ArrayList<String> getBookmarkList() {

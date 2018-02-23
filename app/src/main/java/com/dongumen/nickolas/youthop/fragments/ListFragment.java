@@ -11,11 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.dongumen.nickolas.youthop.App;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
@@ -33,7 +31,7 @@ import butterknife.ButterKnife;
 
 public class ListFragment extends MvpAppCompatFragment implements ListView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
-    @BindView(R.id.recyclerView)
+    @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.loading_view)
     View loadingView;

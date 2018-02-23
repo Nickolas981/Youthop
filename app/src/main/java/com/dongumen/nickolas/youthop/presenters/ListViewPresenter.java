@@ -25,7 +25,6 @@ public class ListViewPresenter extends MvpPresenter<ListView> {
         Query query;
         if (type == QueryTypes.Latest){
             query = dataSource.getmDatabase().limitToFirst(10).orderByChild("dateCreated");
-//            query = dataSource.getmDatabase().limitToLast(10).orderByChild("dateCreated");
         }else if (type == QueryTypes.Approach){
             query = dataSource.getmDatabase().limitToFirst(10).orderByChild("deadline");
         }else {
@@ -33,11 +32,7 @@ public class ListViewPresenter extends MvpPresenter<ListView> {
         }
 
         if (lastDate != 0) {
-//            if (type == QueryTypes.Approach){
-//                query = query.endAt(lastDate);
-//            }else {
                 query =  query.startAt(lastDate);
-//            }
         }
         RxFirebaseDatabase.observeSingleValueEvent(query,
                 DataSnapshotMapper.listOf(OppListItem.class))

@@ -31,8 +31,10 @@
         <activity
             android:name=".activities.SearchActivity"
             android:theme="@style/Theme.SearchTheme" />
-        <activity android:name=".activities.OppActivity"
-            android:theme="@style/Theme.OppTheme"/>
+        <activity
+            android:name=".activities.OppActivity"
+            android:theme="@style/Theme.OppTheme" />
+        <activity android:name=".activities.BookmarkActivity"></activity>
     </application>
 
 </manifest>

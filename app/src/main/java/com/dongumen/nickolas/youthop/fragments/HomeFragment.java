@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongumen.nickolas.youthop.R;
-import com.dongumen.nickolas.youthop.enums.QueryTypes;
+import com.dongumen.nickolas.youthop.widgets.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.widgets.adapters.ViewPagerAdapter;
 
 

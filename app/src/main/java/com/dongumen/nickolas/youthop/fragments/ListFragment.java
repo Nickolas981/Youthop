@@ -15,7 +15,7 @@ import android.widget.Button;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.dongumen.nickolas.youthop.R;
-import com.dongumen.nickolas.youthop.enums.QueryTypes;
+import com.dongumen.nickolas.youthop.widgets.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 import com.dongumen.nickolas.youthop.presenters.ListViewPresenter;
 import com.dongumen.nickolas.youthop.view.ListView;

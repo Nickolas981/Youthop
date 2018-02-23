@@ -1,15 +1,11 @@
 package com.dongumen.nickolas.youthop.presenters;
 
-import android.widget.ListView;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.dongumen.nickolas.youthop.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 import com.dongumen.nickolas.youthop.models.remote.ItemListDataSource;
 import com.dongumen.nickolas.youthop.view.SearchView;
 
-import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import durdinapps.rxfirebase2.DataSnapshotMapper;

@@ -200,7 +200,7 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
             case R.id.twitter:
                 presenter.shareTwitter(opportunity, this);
                 break;
-            case R.id.viber:
+            case R.id.linkedin:
                 presenter.shareViber(opportunity, this);
                 break;
             case R.id.whatsapp:

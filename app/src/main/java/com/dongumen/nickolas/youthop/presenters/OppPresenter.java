@@ -3,17 +3,22 @@ package com.dongumen.nickolas.youthop.presenters;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.dongumen.nickolas.youthop.activities.MainActivity;
 import com.dongumen.nickolas.youthop.activities.OppActivity;
 import com.dongumen.nickolas.youthop.models.enteties.Opportunity;
 import com.dongumen.nickolas.youthop.models.remote.OppDataSource;
 import com.dongumen.nickolas.youthop.utils.DateUtil;
 import com.dongumen.nickolas.youthop.view.OppView;
 import com.google.firebase.database.Query;
+
+import java.util.List;
 
 import durdinapps.rxfirebase2.RxFirebaseDatabase;
 
@@ -52,11 +57,31 @@ public class OppPresenter extends MvpPresenter<OppView> {
     }
 
     public void shareViber(Opportunity opportunity, Context context) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setPackage("com.viber.voip");
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, getMessage(opportunity));
-        saveStartIntent(context, intent, "No Viber...");
+        Intent linkedinIntent = new Intent(Intent.ACTION_SEND);
+        linkedinIntent.setType("text/plain");
+        linkedinIntent.putExtra(Intent.EXTRA_TEXT, getMessage(opportunity));
+
+        boolean linkedinAppFound = false;
+        List<ResolveInfo> matches2 = context.getPackageManager()
+                .queryIntentActivities(linkedinIntent, 0);
+
+        for (ResolveInfo info : matches2) {
+            if (info.activityInfo.packageName.toLowerCase().startsWith(
+                    "com.linkedin")) {
+                linkedinIntent.setPackage(info.activityInfo.packageName);
+                linkedinAppFound = true;
+                break;
+            }
+        }
+
+        if (linkedinAppFound) {
+           context.startActivity(linkedinIntent);
+        }
+        else
+        {
+            Toast.makeText(context,"LinkedIn app not Insatlled in your mobile"
+                    , Toast.LENGTH_LONG).show();
+        }
     }
 
     public void shareWhatsapp(Opportunity opportunity, Context context) {

@@ -15,7 +15,7 @@ import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 import com.dongumen.nickolas.youthop.presenters.SearchViewPresenter;
 import com.dongumen.nickolas.youthop.view.SearchView;
-import com.dongumen.nickolas.youthop.widgets.adapters.ListAdapter;
+import com.dongumen.nickolas.youthop.widgets.adapters.SortedListAdapter;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class SearchActivity extends MvpAppCompatActivity implements SearchView {
     @InjectPresenter
     SearchViewPresenter presenter;
 
-    ListAdapter adapter;
+    SortedListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,8 +19,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dongumen.nickolas.youthop.R;
+import com.dongumen.nickolas.youthop.fragments.FilteredListFragment;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
 import com.dongumen.nickolas.youthop.utils.BookmarkUtil;
+import com.dongumen.nickolas.youthop.widgets.enums.OppType;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -57,30 +59,28 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(int tabId) {
-                switch (tabId) {
-                    case R.id.tab_home:
-                        changeFragment(homeFragment);
-                        break;
-                    case R.id.tab_chatbox:
-                    case R.id.tab_explode:
-                    case R.id.tab_sdg:
-                    case R.id.tab_success_stories:
-                        showDialog();
-                        break;
-                    default:
-                        break;
+        bottomBar.setOnTabSelectListener(tabId -> {
+            switch (tabId) {
+                case R.id.tab_home:
+                    changeFragment(homeFragment, false);
+                    break;
+                case R.id.tab_chatbox:
+                case R.id.tab_explode:
+                case R.id.tab_sdg:
+                case R.id.tab_success_stories:
+                    bottomBar.selectTabWithId(R.id.tab_home);
+                    showDialog();
+                    break;
+                default:
+                    break;
 
-                }
             }
         });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
-        changeFragment(homeFragment);
+        changeFragment(homeFragment, false);
     }
 
     private void showDialog() {
@@ -139,24 +139,52 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id) {
-            case R.id.nav_home: {
-                changeFragment(homeFragment);
-            }
-            default: {
-                //TODO: ??
-            }
+        if (id == R.id.nav_home){
+            bottomBar.setVisibility(View.VISIBLE);
+        }else{
+            bottomBar.setVisibility(View.GONE);
         }
 
-
+        switch (id) {
+            case R.id.nav_home:
+                changeFragment(HomeFragment.newInstance(), false);
+                break;
+            case R.id.nav_scholarships:
+                changeFragment(FilteredListFragment.newInstance(OppType.Scholarships), false);
+                break;
+            case R.id.nav_fellowships:
+                changeFragment(FilteredListFragment.newInstance(OppType.Fellowships), false);
+                break;
+            case R.id.nav_jobs:
+                changeFragment(FilteredListFragment.newInstance(OppType.Jobs), false);
+                break;
+            case R.id.nav_internships:
+                changeFragment(FilteredListFragment.newInstance(OppType.Internships), false);
+                break;
+            case R.id.nav_conferences:
+                changeFragment(FilteredListFragment.newInstance(OppType.Conferences), false);
+                break;
+            case R.id.nav_competitions:
+                changeFragment(FilteredListFragment.newInstance(OppType.Competitions), false);
+                break;
+            case R.id.nav_grants:
+                changeFragment(FilteredListFragment.newInstance(OppType.Grants), false);
+                break;
+            case R.id.nav_miscellaneous:
+                changeFragment(FilteredListFragment.newInstance(OppType.Miscellaneous), false);
+                break;
+            default: break;
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void changeFragment(Fragment fragment) {
+    private void changeFragment(Fragment fragment, boolean add) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(container, fragment);
+        if (add)
+            transaction.addToBackStack(null);
         transaction.commit();
     }
 }

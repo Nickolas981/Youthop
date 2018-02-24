@@ -17,6 +17,8 @@ public class DateUtil {
         if (diffDays > 1)
             res += " days";
         else if(diffDays < 1)
+            res = "ending";
+        else if (millis2 > date1)
             res = "ended";
         else
             res += " day";

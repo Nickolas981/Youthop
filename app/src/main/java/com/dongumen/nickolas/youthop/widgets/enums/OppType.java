@@ -1,6 +1,6 @@
 package com.dongumen.nickolas.youthop.widgets.enums;
 
-public enum OppTypes {
+public enum OppType {
     Scholarships,
     Fellowships,
     Jobs,
@@ -8,5 +8,6 @@ public enum OppTypes {
     Conferences,
     Competitions,
     Grants,
-    Miscellaneous
+    Miscellaneous,
+    Home
 }

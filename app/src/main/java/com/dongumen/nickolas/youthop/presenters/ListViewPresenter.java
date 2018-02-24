@@ -17,8 +17,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 @InjectViewState
 public class ListViewPresenter extends MvpPresenter<ListView> {
-    ItemListDataSource dataSource = new ItemListDataSource();
-    long lastDate ;
+        ItemListDataSource dataSource = new ItemListDataSource();
+        long lastDate ;
 
     public void getList(QueryTypes type) {
         Query query;
@@ -46,10 +46,6 @@ public class ListViewPresenter extends MvpPresenter<ListView> {
                     if (newDate == lastDate)
                         return new ArrayList<OppListItem>();
                     lastDate = newDate;
-//                    if (type == QueryTypes.Latest){
-//                        Collections.reverse(oppListItems);
-//                    }
-
                     return oppListItems;
                 })
                 .subscribe(items -> getViewState().showList(items),
@@ -64,6 +60,7 @@ public class ListViewPresenter extends MvpPresenter<ListView> {
 
     public void refresh(QueryTypes type){
         lastDate = 0;
+        getViewState().showLoading();
         getList(type);
     }
 }

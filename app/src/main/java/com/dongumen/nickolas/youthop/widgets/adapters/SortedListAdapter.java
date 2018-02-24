@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dongumen.nickolas.youthop.utils.DateUtil;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.activities.OppActivity;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
+import com.dongumen.nickolas.youthop.utils.DateUtil;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -23,18 +23,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class SortedListAdapter extends RecyclerView.Adapter<SortedListAdapter.ViewHolder> {
 
 
     private Context context;
     private List<OppListItem> listItems = new ArrayList<>();
 
-    public void setListItems(List<OppListItem> listItems) {
-        this.listItems = listItems;
-        notifyDataSetChanged();
-    }
 
-    public ListAdapter(Context context, List<OppListItem> list) {
+    public SortedListAdapter(Context context, List<OppListItem> list) {
         listItems = list;
         this.context = context;
     }
@@ -49,9 +45,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         bindHolder(holder, listItems.get(position));
-        if (position == getItemCount() - 1){
+        if (position == getItemCount() - 1) {
             holder.divider.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             holder.divider.setVisibility(View.VISIBLE);
         }
     }

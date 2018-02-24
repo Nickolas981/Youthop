@@ -4,7 +4,7 @@
     android:background="@color/very_light_gray"
     android:orientation="horizontal"
     android:id="@+id/bottom_bar"
-    android:visibility="gone"
+    android:visibility="visible"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
@@ -32,14 +32,14 @@
         android:focusable="true" />
 
     <ImageView
-        android:id="@+id/viber"
+        android:id="@+id/linkedin"
         android:layout_width="0dp"
         android:clickable="true"
         android:layout_height="wrap_content"
         android:padding="13dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_weight="1"
-        android:src="@drawable/viber"
+        android:src="@drawable/linkedin"
         android:onClick="onClick"
         android:focusable="true" />
 

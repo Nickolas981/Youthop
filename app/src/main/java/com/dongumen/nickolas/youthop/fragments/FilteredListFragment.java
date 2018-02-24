@@ -1,6 +1,5 @@
 package com.dongumen.nickolas.youthop.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +14,13 @@ import android.widget.Button;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.dongumen.nickolas.youthop.R;
-import com.dongumen.nickolas.youthop.widgets.adapters.SortedListAdapter;
-import com.dongumen.nickolas.youthop.widgets.enums.QueryTypes;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
+import com.dongumen.nickolas.youthop.presenters.FilteredListPresenter;
 import com.dongumen.nickolas.youthop.presenters.ListViewPresenter;
 import com.dongumen.nickolas.youthop.view.ListView;
+import com.dongumen.nickolas.youthop.widgets.adapters.FilteredListAdapter;
+import com.dongumen.nickolas.youthop.widgets.adapters.SortedListAdapter;
+import com.dongumen.nickolas.youthop.widgets.enums.OppType;
 import com.dongumen.nickolas.youthop.widgets.listeners.EndlessRecyclerViewScrollListener;
 
 import java.util.ArrayList;
@@ -28,8 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-public class ListFragment extends MvpAppCompatFragment implements ListView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+public class FilteredListFragment extends MvpAppCompatFragment implements ListView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -42,27 +42,22 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout refreshLayout;
 
-    public QueryTypes type;
-
+    private OppType type;
 
     List<OppListItem> listItems;
-
-    public EndlessRecyclerViewScrollListener listener;
     public LinearLayoutManager linearLayoutManager;
 
 
     @InjectPresenter
-    ListViewPresenter presenter;
-    SortedListAdapter adapter;
+    FilteredListPresenter presenter;
+    FilteredListAdapter adapter;
 
-    public ListFragment() {
-        // Required empty public constructor
+    public FilteredListFragment() {
     }
 
-
-    public static ListFragment newInstance(QueryTypes t) {
-        ListFragment fragment = new ListFragment();
-        fragment.type = t;
+    public static FilteredListFragment newInstance(OppType type) {
+        FilteredListFragment fragment = new FilteredListFragment();
+        fragment.type = type;
         return fragment;
     }
 
@@ -80,37 +75,18 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        listener = new EndlessRecyclerViewScrollListener() {
-            @Override
-            public void onLoadMore() {
-                presenter.getList(type);
-            }
 
-        };
         refreshLayout.setOnRefreshListener(this);
         tryAgainButton.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new SortedListAdapter(getActivity(), listItems);
-        recyclerView.setOnScrollListener(listener);
+        adapter = new FilteredListAdapter(getActivity(), listItems);
         recyclerView.setAdapter(adapter);
         return v;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.getList(type);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
@@ -140,7 +116,6 @@ public class ListFragment extends MvpAppCompatFragment implements ListView, Swip
         loadingView.setVisibility(View.VISIBLE);
         refreshLayout.setVisibility(View.INVISIBLE);
     }
-
 
     @Override
     public void onRefresh() {

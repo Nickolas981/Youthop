@@ -47,4 +47,13 @@
         <item name="rippleColor">@android:color/white</item>
     </style>
 
+    <style name="AppTheme.WebView" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:textColorSecondary">#fff</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
 </resources>

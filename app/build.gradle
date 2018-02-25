@@ -49,5 +49,8 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.9'
     compile 'com.github.frangsierra:rx2firebase:1.4.0'
     compile 'com.gjiazhe:PanoramaImageView:1.0'
+    compile 'com.thefinestartist:finestwebview:1.2.7'
+    compile 'com.google.firebase:firebase-messaging:11.8.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

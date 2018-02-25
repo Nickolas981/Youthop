@@ -21,10 +21,9 @@ import android.widget.TextView;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.fragments.FilteredListFragment;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
-import com.dongumen.nickolas.youthop.utils.BookmarkUtil;
+import com.dongumen.nickolas.youthop.utils.NotifUtil;
 import com.dongumen.nickolas.youthop.widgets.enums.OppType;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,13 +51,10 @@ public class MainActivity extends AppCompatActivity
         homeFragment = HomeFragment.newInstance();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         bottomBar.setOnTabSelectListener(tabId -> {
             switch (tabId) {
                 case R.id.tab_home:
@@ -73,7 +69,6 @@ public class MainActivity extends AppCompatActivity
                     break;
                 default:
                     break;
-
             }
         });
 
@@ -81,6 +76,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
         changeFragment(homeFragment, false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notifications = new NotifUtil(this).getCount();
+        setBadge();
     }
 
     private void showDialog() {
@@ -110,15 +112,26 @@ public class MainActivity extends AppCompatActivity
         final MenuItem menuItem = menu.findItem(R.id.action_bell);
         View actionView = MenuItemCompat.getActionView(menuItem);
         notificationBadge = actionView.findViewById(R.id.bell_badge);
-        if (notifications != 0) {
-            notificationBadge.setVisibility(View.VISIBLE);
-            notificationBadge.setText(String.valueOf(Math.min(notifications, 99)));
-        } else {
-            notificationBadge.setVisibility(View.GONE);
-        }
-
+        notificationBadge.setOnClickListener(view -> {
+            startActivity(new Intent(this, NotifActivity.class));
+        });
+        actionView.findViewById(R.id.bell).setOnClickListener(view ->
+                startActivity(new Intent(this, NotifActivity.class)));
+        setBadge();
         return true;
     }
+
+    private void setBadge() {
+        if (notificationBadge != null) {
+            if (notifications != 0) {
+                notificationBadge.setVisibility(View.VISIBLE);
+                notificationBadge.setText(String.valueOf(Math.min(notifications, 99)));
+            } else {
+                notificationBadge.setVisibility(View.GONE);
+            }
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -127,9 +140,11 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
             return true;
-        }else if (id == R.id.action_bookmark){
+        } else if (id == R.id.action_bookmark) {
             Intent intent = new Intent(this, BookmarkActivity.class);
             startActivity(intent);
+        } else if (id == R.id.action_bell) {
+            startActivity(new Intent(this, NotifActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -139,9 +154,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_home){
+        if (id == R.id.nav_home) {
             bottomBar.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             bottomBar.setVisibility(View.GONE);
         }
 
@@ -173,7 +188,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_miscellaneous:
                 changeFragment(FilteredListFragment.newInstance(OppType.Miscellaneous), false);
                 break;
-            default: break;
+            default:
+                break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

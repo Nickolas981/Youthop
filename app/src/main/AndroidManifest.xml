@@ -34,7 +34,22 @@
         <activity
             android:name=".activities.OppActivity"
             android:theme="@style/Theme.OppTheme" />
-        <activity android:name=".activities.BookmarkActivity"
+        <activity
+            android:name=".activities.BookmarkActivity"
+            android:theme="@style/Theme.BookmarkTheme" />
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/AppTheme.WebView" />
+
+        <service android:name=".services.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activities.NotifActivity"
             android:theme="@style/Theme.BookmarkTheme" />
     </application>
 

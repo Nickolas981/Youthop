@@ -18,6 +18,7 @@ import com.dongumen.nickolas.youthop.models.enteties.Opportunity;
 import com.dongumen.nickolas.youthop.presenters.OppPresenter;
 import com.dongumen.nickolas.youthop.utils.BookmarkUtil;
 import com.dongumen.nickolas.youthop.utils.DateUtil;
+import com.dongumen.nickolas.youthop.utils.NotifUtil;
 import com.dongumen.nickolas.youthop.view.OppView;
 import com.gjiazhe.panoramaimageview.GyroscopeObserver;
 import com.gjiazhe.panoramaimageview.PanoramaImageView;
@@ -69,10 +70,8 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
     TextView eligibleRegions;
 
 
-
     private Opportunity opportunity;
 
-    private CollapsingToolbarLayout collapsingToolbarLayout;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images");
     private GyroscopeObserver gyroscopeObserver;
     private BookmarkUtil bookmarkUtil;
@@ -91,6 +90,7 @@ public class OppActivity extends MvpAppCompatActivity implements OppView, View.O
         bookmarkUtil = new BookmarkUtil(this);
         Slidr.attach(this);
         ButterKnife.bind(this);
+
         initListeners();
         image.setGyroscopeObserver(gyroscopeObserver);
         setSupportActionBar(findViewById(R.id.toolbar));

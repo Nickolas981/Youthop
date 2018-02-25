@@ -17,6 +17,7 @@ import com.dongumen.nickolas.youthop.models.remote.OppDataSource;
 import com.dongumen.nickolas.youthop.utils.DateUtil;
 import com.dongumen.nickolas.youthop.view.OppView;
 import com.google.firebase.database.Query;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.List;
 
@@ -49,39 +50,29 @@ public class OppPresenter extends MvpPresenter<OppView> {
                 opportunity.place;
     }
 
-    public void shareTwitter(Opportunity opportunity, Context context) {
+    public void shareTwitter(Opportunity opportunity, OppActivity oppActivity) {
         String url = "http://www.twitter.com/intent/tweet?text=" + getMessage(opportunity);
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        context.startActivity(i);
+        new FinestWebView.Builder(oppActivity).show(url);
     }
 
     public void shareViber(Opportunity opportunity, Context context) {
         Intent linkedinIntent = new Intent(Intent.ACTION_SEND);
         linkedinIntent.setType("text/plain");
         linkedinIntent.putExtra(Intent.EXTRA_TEXT, getMessage(opportunity));
-
         boolean linkedinAppFound = false;
         List<ResolveInfo> matches2 = context.getPackageManager()
                 .queryIntentActivities(linkedinIntent, 0);
-
-        for (ResolveInfo info : matches2) {
+        for (ResolveInfo info : matches2)
             if (info.activityInfo.packageName.toLowerCase().startsWith(
                     "com.linkedin")) {
                 linkedinIntent.setPackage(info.activityInfo.packageName);
                 linkedinAppFound = true;
                 break;
             }
-        }
-
-        if (linkedinAppFound) {
-           context.startActivity(linkedinIntent);
-        }
+        if (linkedinAppFound) context.startActivity(linkedinIntent);
         else
-        {
-            Toast.makeText(context,"LinkedIn app not Insatlled in your mobile"
+            Toast.makeText(context, "LinkedIn app not Insatlled in your mobile"
                     , Toast.LENGTH_LONG).show();
-        }
     }
 
     public void shareWhatsapp(Opportunity opportunity, Context context) {
@@ -132,15 +123,11 @@ public class OppPresenter extends MvpPresenter<OppView> {
 
     public void applyNow(Opportunity opportunity, OppActivity oppActivity) {
         String url = opportunity.oppUrls.applyNowUrl;
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        oppActivity.startActivity(i);
+        new FinestWebView.Builder(oppActivity).show(url);
     }
 
     public void officialLink(Opportunity opportunity, OppActivity oppActivity) {
         String url = opportunity.oppUrls.linkUrl;
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        oppActivity.startActivity(i);
+        new FinestWebView.Builder(oppActivity).show(url);
     }
 }

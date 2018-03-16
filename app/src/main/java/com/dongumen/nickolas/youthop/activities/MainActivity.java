@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.fragments.FilteredListFragment;
 import com.dongumen.nickolas.youthop.fragments.HomeFragment;
+import com.dongumen.nickolas.youthop.fragments.SdgFragment;
 import com.dongumen.nickolas.youthop.utils.NotifUtil;
 import com.dongumen.nickolas.youthop.widgets.enums.OppType;
 import com.roughike.bottombar.BottomBar;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         homeFragment = HomeFragment.newInstance();
-
+        startActivity(new Intent(this, SplashScreen.class));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -57,14 +58,15 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         bottomBar.setOnTabSelectListener(tabId -> {
             switch (tabId) {
+                case R.id.tab_sdg:
+                    changeFragment(SdgFragment.newInstance(), false);
+                    break;
                 case R.id.tab_home:
-                    changeFragment(homeFragment, false);
+                    changeFragment(HomeFragment.newInstance(), false);
                     break;
                 case R.id.tab_chatbox:
                 case R.id.tab_explode:
-                case R.id.tab_sdg:
                 case R.id.tab_success_stories:
-                    bottomBar.selectTabWithId(R.id.tab_home);
                     showDialog();
                     break;
                 default:

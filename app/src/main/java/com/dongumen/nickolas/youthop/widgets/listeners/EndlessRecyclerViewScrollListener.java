@@ -9,7 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
  * Created by Nickolas on 23.09.2017.
  */
 
-public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+    public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 
       public static String TAG = EndlessRecyclerViewScrollListener.class.getSimpleName();
 

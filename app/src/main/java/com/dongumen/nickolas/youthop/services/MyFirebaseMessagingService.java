@@ -4,8 +4,10 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 
+import com.dongumen.nickolas.youthop.R;
 import com.dongumen.nickolas.youthop.activities.MainActivity;
 import com.dongumen.nickolas.youthop.models.enteties.OppListItem;
 import com.dongumen.nickolas.youthop.utils.NotifUtil;
@@ -21,7 +23,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         notifUtil = new NotifUtil(this);
         notifUtil.addNotif(remoteMessage.getNotification().getBody());
-        sendNotif(remoteMessage.getNotification().getBody());
+        String str = remoteMessage.getNotification().getBody().split("%")[1];
+        sendNotif(str);
     }
 
 
@@ -31,7 +34,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(android.R.drawable.ic_dialog_email)
+                        .setSmallIcon(R.drawable.logo)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
                         .setContentText(message)
                         .setContentIntent(resultPendingIntent)
                         .setAutoCancel(true);

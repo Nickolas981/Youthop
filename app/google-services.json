@@ -1,58 +1,27 @@
 {
   "project_info": {
-    "project_number": "940332243170",
-    "firebase_url": "https://youthreplica.firebaseio.com",
-    "project_id": "youthreplica",
-    "storage_bucket": "youthreplica.appspot.com"
+    "project_number": "397751648228",
+    "firebase_url": "https://youthshapers-8f635.firebaseio.com",
+    "project_id": "youthshapers-8f635",
+    "storage_bucket": "youthshapers-8f635.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:940332243170:android:e40a193f3fc73d39",
-        "android_client_info": {
-          "package_name": "com.dongumen.nickolas.youthreplica"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "940332243170-khjuvnhkt04nsgo27eesafbq1rpf9un4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDUG24EFlrHbdOVOiXkgrVa7YSVBCeJ-4k"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:940332243170:android:d9429c0f10865bb4",
+        "mobilesdk_app_id": "1:397751648228:android:d9429c0f10865bb4",
         "android_client_info": {
           "package_name": "com.dongumen.nickolas.youthop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "940332243170-khjuvnhkt04nsgo27eesafbq1rpf9un4.apps.googleusercontent.com",
+          "client_id": "397751648228-c81vf6snofn8bf687vu3lg3dj3obl4mj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDUG24EFlrHbdOVOiXkgrVa7YSVBCeJ-4k"
+          "current_key": "AIzaSyAYkJvcAm2j1Gzy69tcHbjiIIUXaVzyItY"
         }
       ],
       "services": {
